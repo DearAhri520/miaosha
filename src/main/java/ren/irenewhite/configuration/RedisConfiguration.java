@@ -1,4 +1,4 @@
-package ren.irenewhite.config;
+package ren.irenewhite.configuration;
 
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +23,7 @@ import ren.irenewhite.redis.RedisManager;
  */
 @EnableCaching
 @Configuration
-public class RedisConfig {
+public class RedisConfiguration {
     @Value("${spring.redis.host}")
     private String host;
     @Value("${spring.redis.database}")

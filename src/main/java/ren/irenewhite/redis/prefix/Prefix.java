@@ -7,7 +7,15 @@ package ren.irenewhite.redis.prefix;
 public interface Prefix {
     /**
      * 获取前缀
+     *
      * @return 前缀
      */
-    public String getPrefix();
+    String getPrefix();
+
+    /**
+     * 获取过期时间
+     *
+     * @return 过期时间
+     */
+    int expireSeconds();
 }

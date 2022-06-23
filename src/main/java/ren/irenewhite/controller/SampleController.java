@@ -5,9 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ren.irenewhite.domain.User;
 import ren.irenewhite.redis.RedisManager;
-import ren.irenewhite.redis.key.UserKey;
 import ren.irenewhite.result.CodeMsg;
 import ren.irenewhite.result.Result;
 import ren.irenewhite.service.UserService;
@@ -49,34 +47,9 @@ public class SampleController {
         return "hello";
     }
 
-    @RequestMapping("/db/get")
-    @ResponseBody
-    public Result<User> dbGet() {
-        User user = service.getById(1);
-        System.out.println(user);
-        return Result.success(user);
-    }
-
     @RequestMapping("/db/insert")
     @ResponseBody
     public Result<Boolean> dbInsert() {
-        service.insert();
         return Result.success(true);
-    }
-
-    @RequestMapping("/redis/get")
-    @ResponseBody
-    public Result<User> redisGet() {
-        User obj = redisService.get(UserKey.getById, "String", User.class);
-        return Result.success(obj);
-    }
-
-    @RequestMapping("/redis/insert")
-    @ResponseBody
-    public Result<Object> redisInsert() {
-        return Result.success(redisService.set(UserKey.getById,"String", new User() {{
-            setId(1);
-            setName("Ahri");
-        }}));
     }
 }

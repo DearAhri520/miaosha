@@ -24,7 +24,7 @@
 
 <form name="loginForm" id="loginForm" method="post" style="width:50%; margin:0 auto">
 
-    <h2 style="text-align:center; margin-bottom: 20px">用户登录</h2>
+    <h2 style="text-align:center; margin-bottom: 20px">用户注册</h2>
 
     <div class="form-group">
         <div class="row">
@@ -50,7 +50,7 @@
 
     <div class="row">
         <div class="col-md-5">
-            <button class="btn btn-primary btn-block" type="submit" onclick="login()">登录</button>
+            <button class="btn btn-primary btn-block" type="submit" onclick="login()">注册</button>
         </div>
 
         <div class="col-md-5">
@@ -77,7 +77,7 @@
         var password = md5(str);
 
         $.ajax({
-            url: "/login/do_login",
+            url: "/register/do_register",
             type: "POST",
             data: {
                 mobile: $("#mobile").val(),
