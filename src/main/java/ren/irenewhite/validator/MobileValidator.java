@@ -20,13 +20,11 @@ public class MobileValidator implements ConstraintValidator<Mobile, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (required) {
-            return ValidatorUtil.isMobileNumber(value);
-        } else{
-            if(StringUtils.isEmpty(value)){
+        if (!required) {
+            if (StringUtils.isEmpty(value)) {
                 return true;
             }
-            return ValidatorUtil.isMobileNumber(value);
         }
+        return ValidatorUtil.isMobileNumber(value);
     }
 }

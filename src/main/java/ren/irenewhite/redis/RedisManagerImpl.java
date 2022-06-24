@@ -96,7 +96,11 @@ public final class RedisManagerImpl implements RedisManager {
 
     @Override
     public <T> boolean set(Prefix prefix, String key, T value) {
-        return set(prefix.getPrefix() + key, value);
+        if (prefix.expireSeconds() != 0) {
+            return set(prefix.getPrefix() + key, value, prefix.expireSeconds());
+        } else {
+            return set(prefix.getPrefix() + key, value);
+        }
     }
 
     @Override
@@ -115,8 +119,8 @@ public final class RedisManagerImpl implements RedisManager {
     }
 
     @Override
-    public <T> boolean set(Prefix prefix,String key, T value,long time){
-        return set(prefix.getPrefix()+key,value,time);
+    public <T> boolean set(Prefix prefix, String key, T value, long time) {
+        return set(prefix.getPrefix() + key, value, time);
     }
 
     @Override

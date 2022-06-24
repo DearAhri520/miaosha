@@ -50,7 +50,7 @@ public class UserService {
         }
         User user = redisService.get(UserKey.token, token, User.class);
         if (user != null) {
-            addCookie(user, response);
+            addCookie(user, token, response);
         }
         return user;
     }
@@ -78,7 +78,7 @@ public class UserService {
         if (!MD5Util.formPassToDBPass(loginUser.getPassword(), salt).equals(dbPass)) {
             throw new GlobalException(CodeMsg.PASSWORD_ERROR);
         }
-        addCookie(user, response);
+        addCookie(user, UUIDUtil.uuid(), response);
         return true;
     }
 
@@ -98,8 +98,7 @@ public class UserService {
      * @param user     用户
      * @param response 返回的响应
      */
-    private void addCookie(User user, HttpServletResponse response) {
-        String token = UUIDUtil.uuid();
+    private void addCookie(User user, String token, HttpServletResponse response) {
         redisService.set(UserKey.token, token, user);
         Cookie cookie = new Cookie(COOKIE_NAME_TOKEN, token);
         cookie.setMaxAge(UserKey.token.expireSeconds());

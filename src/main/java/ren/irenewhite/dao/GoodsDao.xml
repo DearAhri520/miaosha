@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ren.irenewhite.dao.GoodsDao">
+  <resultMap id="BaseResultMap" type="ren.irenewhite.domain.Good">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodName" />
+    <result column="goods_title" jdbcType="VARCHAR" property="goodTitle" />
+    <result column="goods_img" jdbcType="VARCHAR" property="goodImg" />
+    <result column="goods_detail" jdbcType="VARCHAR" property="goodDetail" />
+    <result column="goods_price" jdbcType="DECIMAL" property="goodPrice" />
+    <result column="goods_stock" jdbcType="INTEGER" property="goodStock" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, goods_name, goods_title, goods_img, goods_detail, goods_price, goods_stock
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from goods
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.Good" useGeneratedKeys="true">
+    insert into goods (goods_name, goods_title, goods_img, 
+      goods_detail, goods_price, goods_stock
+      )
+    values (#{goodsName,jdbcType=VARCHAR}, #{goodsTitle,jdbcType=VARCHAR}, #{goodsImg,jdbcType=VARCHAR}, 
+      #{goodsDetail,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, #{goodsStock,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.Good" useGeneratedKeys="true">
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="goodsTitle != null">
+        goods_title,
+      </if>
+      <if test="goodsImg != null">
+        goods_img,
+      </if>
+      <if test="goodsDetail != null">
+        goods_detail,
+      </if>
+      <if test="goodsPrice != null">
+        goods_price,
+      </if>
+      <if test="goodsStock != null">
+        goods_stock,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsTitle != null">
+        #{goodsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImg != null">
+        #{goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDetail != null">
+        #{goodsDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null">
+        #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsStock != null">
+        #{goodsStock,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ren.irenewhite.domain.Good">
+    update goods
+    <set>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsTitle != null">
+        goods_title = #{goodsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImg != null">
+        goods_img = #{goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDetail != null">
+        goods_detail = #{goodsDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null">
+        goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsStock != null">
+        goods_stock = #{goodsStock,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ren.irenewhite.domain.Good">
+    update goods
+    set goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_title = #{goodsTitle,jdbcType=VARCHAR},
+      goods_img = #{goodsImg,jdbcType=VARCHAR},
+      goods_detail = #{goodsDetail,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      goods_stock = #{goodsStock,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
