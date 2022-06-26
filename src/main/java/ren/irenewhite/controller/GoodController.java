@@ -41,15 +41,15 @@ public class GoodController {
         model.addAttribute("user", user);
         GoodInfo goodInfo = goodService.getGoodInfoById(goodsId);
         model.addAttribute("goodInfo", goodInfo);
+        log.info(goodInfo.toString());
         long start = goodInfo.getStartTime().getTime(),
                 end = goodInfo.getEndTime().getTime(),
                 now = System.currentTimeMillis();
-        log.info(goodInfo.toString());
         /*秒杀未开始*/
         int status, remainSeconds;
         if (now < start) {
             status = 0;
-            remainSeconds = (int) ((status - now) / 1000);
+            remainSeconds = (int) ((start - now) / 1000);
         }
         /*秒杀已结束*/
         else if (now > end) {
@@ -61,8 +61,9 @@ public class GoodController {
             status = 1;
             remainSeconds = 0;
         }
-        model.addAttribute("miaoshaStatus", status);
+        model.addAttribute("snipingStatus", status);
         model.addAttribute("remainSeconds", remainSeconds);
+        log.info("remainSeconds:{}",remainSeconds);
         return "goods_detail";
     }
 }

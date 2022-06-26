@@ -3,6 +3,7 @@ package ren.irenewhite.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.Data;
+import org.apache.ibatis.type.Alias;
 
 /**
  * goods

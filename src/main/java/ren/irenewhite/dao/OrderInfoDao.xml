@@ -11,8 +11,8 @@
     <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
     <result column="order_channel" jdbcType="TINYINT" property="orderChannel" />
     <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="pay_date" jdbcType="TIMESTAMP" property="payDate" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="pay_date" jdbcType="DATE" property="payDate" />
   </resultMap>
   <sql id="Base_Column_List">
     id, user_id, goods_id, delivery_address_id, goods_name, goods_count, goods_price, 

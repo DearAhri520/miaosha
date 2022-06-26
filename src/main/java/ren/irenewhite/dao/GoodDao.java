@@ -4,7 +4,10 @@ import org.apache.ibatis.annotations.Select;
 import ren.irenewhite.domain.Good;
 import ren.irenewhite.pojo.GoodInfo;
 
-public interface GoodsDao {
+/**
+ * @author DearAhri520
+ */
+public interface GoodDao {
     int deleteByPrimaryKey(Long id);
 
     int insert(Good record);

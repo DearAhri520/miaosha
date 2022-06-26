@@ -19,7 +19,6 @@ public interface GoodInfoDao {
      *
      * @return 所有商品信息
      */
-    @Select("select goods.*,sg.sniping_price,sg.stock_count,sg.start_time,sg.end_time from sniping_goods sg left join goods on sg.id = goods.id")
     List<GoodInfo> getGoodsInfo();
 
     /**
@@ -28,6 +27,5 @@ public interface GoodInfoDao {
      * @param id 商品id
      * @return 商品信息
      */
-    @Select("select goods.*,sg.sniping_price,sg.stock_count,sg.start_time,sg.end_time from sniping_goods sg left join goods on sg.id = goods.id where goods.id = #{id}")
     GoodInfo getGoodInfoById(long id);
 }

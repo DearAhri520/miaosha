@@ -24,9 +24,9 @@ public class GoodInfo extends Good {
     private BigDecimal snipingPrice;
 
     /**
-     * 库存数量
+     * 秒杀库存数量
      */
-    private Integer stockCount;
+    private Integer snipingStockCount;
 
     /**
      * 秒杀开始时间
