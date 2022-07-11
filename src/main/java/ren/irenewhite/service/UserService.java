@@ -44,6 +44,13 @@ public class UserService {
         return userDao.selectByPrimaryKey(id);
     }
 
+    /**
+     * 根据用户token从数据库获取一个用户
+     *
+     * @param response 响应
+     * @param token 用户token
+     * @return 获取的用户
+     */
     public User getByToken(HttpServletResponse response, String token) {
         if (StringUtils.isEmpty(token)) {
             return null;

@@ -2,8 +2,8 @@ package ren.irenewhite.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ren.irenewhite.dao.GoodInfoDao;
-import ren.irenewhite.pojo.GoodInfo;
+import ren.irenewhite.dao.GoodDao;
+import ren.irenewhite.domain.Good;
 
 import java.util.List;
 
@@ -12,16 +12,21 @@ import java.util.List;
  * @date 2022/6/24
  */
 @Service
-public class GoodService {
+public class GoodService{
 
     @Autowired
-    GoodInfoDao goodDao;
+    GoodDao goodDao;
 
-    public List<GoodInfo> getGoodsInfo(){
-        return goodDao.getGoodsInfo();
+    /**
+     * 减少商品库存
+     *
+     * @param id 商品id
+     */
+    public int reduceStockById(Long id) {
+        return goodDao.updateStockCountById(id);
     }
 
-    public GoodInfo getGoodInfoById(long goodsId) {
-        return goodDao.getGoodInfoById(goodsId);
+    public List<Good> getGoods(){
+        return goodDao.getGoods();
     }
 }

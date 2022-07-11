@@ -4,23 +4,17 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * sniping_goods
  * @author DearAhri520
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class SnipingGood implements Serializable {
-    /**
-     * 秒杀商品表
-     */
-    private Long id;
-
-    /**
-     * 商品id
-     */
-    private Long goodsId;
-
+@ToString(callSuper = true)
+public class SnipingGood extends Good{
     /**
      * 秒杀价
      */
@@ -29,7 +23,7 @@ public class SnipingGood implements Serializable {
     /**
      * 库存数量
      */
-    private Integer stockCount;
+    private Integer snipingGoodStock;
 
     /**
      * 秒杀开始时间
@@ -40,6 +34,4 @@ public class SnipingGood implements Serializable {
      * 秒杀结束时间
      */
     private Date endTime;
-
-    private static final long serialVersionUID = 1L;
 }

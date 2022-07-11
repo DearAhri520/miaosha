@@ -1,13 +1,17 @@
 package ren.irenewhite.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import ren.irenewhite.domain.Good;
-import ren.irenewhite.pojo.GoodInfo;
+
+import java.util.List;
 
 /**
  * @author DearAhri520
  */
-public interface GoodDao {
+@Mapper
+public interface GoodDao{
     int deleteByPrimaryKey(Long id);
 
     int insert(Good record);
@@ -15,9 +19,15 @@ public interface GoodDao {
     int insertSelective(Good record);
 
     @Select("select * from goods where id = #{id}")
-    GoodInfo selectByPrimaryKey(Long id);
+    Good selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Good record);
 
     int updateByPrimaryKey(Good record);
+
+    @Update("update goods set good_stock = good_stock - 1 where id = #{id}")
+    int updateStockCountById(Long id);
+
+    @Select("select * from goods")
+    List<Good> getGoods();
 }

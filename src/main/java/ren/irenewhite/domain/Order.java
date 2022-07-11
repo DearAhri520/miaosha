@@ -10,7 +10,7 @@ import lombok.Data;
  * @author 
  */
 @Data
-public class OrderInfo implements Serializable {
+public class Order implements Serializable {
     /**
      * 订单id
      */
@@ -24,7 +24,7 @@ public class OrderInfo implements Serializable {
     /**
      * 商品id
      */
-    private Long goodsId;
+    private Long goodId;
 
     /**
      * 收货地址id
@@ -34,17 +34,17 @@ public class OrderInfo implements Serializable {
     /**
      * 冗余的商品名称
      */
-    private String goodsName;
+    private String goodName;
 
     /**
      * 商品数量
      */
-    private Integer goodsCount;
+    private Integer goodCount;
 
     /**
      * 商品单价
      */
-    private BigDecimal goodsPrice;
+    private BigDecimal goodPrice;
 
     /**
      * 1:pc 2:android 3:iOS

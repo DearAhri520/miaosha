@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * sniping_order
- * @author 
+ * @author DearAhri520
  */
 @Data
 public class SnipingOrder implements Serializable {
@@ -17,14 +17,14 @@ public class SnipingOrder implements Serializable {
     private Long userId;
 
     /**
-     * 订单id
+     * 秒杀订单id
      */
     private Long orderId;
 
     /**
      * 商品id
      */
-    private Long goodsId;
+    private Long goodId;
 
     private static final long serialVersionUID = 1L;
 }

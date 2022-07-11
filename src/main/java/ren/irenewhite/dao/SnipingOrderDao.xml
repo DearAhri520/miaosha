@@ -5,10 +5,10 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="order_id" jdbcType="BIGINT" property="orderId" />
-    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="good_id" jdbcType="BIGINT" property="goodId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, order_id, goods_id
+    id, user_id, order_id, good_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -21,9 +21,9 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.SnipingOrder" useGeneratedKeys="true">
-    insert into sniping_order (user_id, order_id, goods_id
+    insert into sniping_order (user_id, order_id, good_id
       )
-    values (#{userId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}
+    values (#{userId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{goodId,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.SnipingOrder" useGeneratedKeys="true">
@@ -35,8 +35,8 @@
       <if test="orderId != null">
         order_id,
       </if>
-      <if test="goodsId != null">
-        goods_id,
+      <if test="goodId != null">
+        good_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -46,8 +46,8 @@
       <if test="orderId != null">
         #{orderId,jdbcType=BIGINT},
       </if>
-      <if test="goodsId != null">
-        #{goodsId,jdbcType=BIGINT},
+      <if test="goodId != null">
+        #{goodId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -60,8 +60,8 @@
       <if test="orderId != null">
         order_id = #{orderId,jdbcType=BIGINT},
       </if>
-      <if test="goodsId != null">
-        goods_id = #{goodsId,jdbcType=BIGINT},
+      <if test="goodId != null">
+        good_id = #{goodId,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -70,7 +70,13 @@
     update sniping_order
     set user_id = #{userId,jdbcType=BIGINT},
       order_id = #{orderId,jdbcType=BIGINT},
-      goods_id = #{goodsId,jdbcType=BIGINT}
+      good_id = #{goodId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectByUserIdAndGoodId" parameterType="long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sniping_order
+    where user_id = #{userId} and good_id = #{goodId}
+  </select>
 </mapper>

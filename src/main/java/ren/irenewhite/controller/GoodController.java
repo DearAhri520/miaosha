@@ -6,9 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ren.irenewhite.domain.SnipingGood;
 import ren.irenewhite.domain.User;
-import ren.irenewhite.pojo.GoodInfo;
 import ren.irenewhite.service.GoodService;
+import ren.irenewhite.service.SnipingGoodService;
 import ren.irenewhite.service.UserService;
 
 import java.util.List;
@@ -28,22 +29,26 @@ public class GoodController {
     @Autowired
     GoodService goodService;
 
+    @Autowired
+    SnipingGoodService snipingGoodService;
+
     @RequestMapping("/to_list")
     public String toList(User user, Model model) {
         /*查询商品列表*/
-        List<GoodInfo> goodInfos = goodService.getGoodsInfo();
+        List<SnipingGood> goodInfos = snipingGoodService.getSnipingGoods();
+        log.info("商品列表:{}", goodInfos);
         model.addAttribute("goodsList", goodInfos);
         return "goods_list";
     }
 
-    @RequestMapping("/to_detail/{goodsId}")
-    public String detail(User user, Model model, @PathVariable("goodsId") long goodsId) {
+    @RequestMapping("/to_detail/{goodId}")
+    public String detail(User user, Model model, @PathVariable("goodId") long goodId) {
         model.addAttribute("user", user);
-        GoodInfo goodInfo = goodService.getGoodInfoById(goodsId);
-        model.addAttribute("goodInfo", goodInfo);
-        log.info(goodInfo.toString());
-        long start = goodInfo.getStartTime().getTime(),
-                end = goodInfo.getEndTime().getTime(),
+        SnipingGood snipingGood = snipingGoodService.getSnipingGoodById(goodId);
+        log.info("秒杀商品:{}", snipingGood.toString());
+        model.addAttribute("goodInfo", snipingGood);
+        long start = snipingGood.getStartTime().getTime(),
+                end = snipingGood.getEndTime().getTime(),
                 now = System.currentTimeMillis();
         /*秒杀未开始*/
         int status, remainSeconds;
@@ -63,7 +68,7 @@ public class GoodController {
         }
         model.addAttribute("snipingStatus", status);
         model.addAttribute("remainSeconds", remainSeconds);
-        log.info("remainSeconds:{}",remainSeconds);
+        log.info("remainSeconds:{}", remainSeconds);
         return "goods_detail";
     }
 }

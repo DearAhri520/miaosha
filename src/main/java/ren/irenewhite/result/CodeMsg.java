@@ -32,7 +32,11 @@ public class CodeMsg {
 
     //订单模块 5004XX
 
-    //秒杀模块 5005XX
+    /**
+     * 秒杀模块 5005XX
+     */
+    public static CodeMsg GOOD_SNIPING_OVER = new CodeMsg(500500, "商品库存已秒杀完毕");
+    public static CodeMsg CANT_REPEAT_SNIPING = new CodeMsg(500501,"您已秒杀成功，不能重复秒杀该商品");
 
 
     private CodeMsg(int code, String msg) {

@@ -38,7 +38,6 @@ public class RedisConfiguration {
     @ConfigurationProperties(prefix = "spring.redis.pool")
     public JedisPoolConfig jedisPoolConfig() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-        jedisPoolConfig.setMaxWaitMillis(10000);
         return jedisPoolConfig;
     }
 
