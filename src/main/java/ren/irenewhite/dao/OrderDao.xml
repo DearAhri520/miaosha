@@ -29,13 +29,13 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.Order" useGeneratedKeys="true">
-    insert into order_info (user_id, good_id, delivery_address_id, 
-      good_name, good_count, good_price, 
-      order_channel, `status`, create_date, 
+    insert into order_info (user_id, good_id, delivery_address_id,
+      good_name, good_count, good_price,
+      order_channel, `status`, create_date,
       pay_date)
-    values (#{userId,jdbcType=BIGINT}, #{goodId,jdbcType=BIGINT}, #{deliveryAddressId,jdbcType=BIGINT}, 
-      #{goodName,jdbcType=VARCHAR}, #{goodCount,jdbcType=INTEGER}, #{goodPrice,jdbcType=DECIMAL}, 
-      #{orderChannel,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP}, 
+    values (#{userId,jdbcType=BIGINT}, #{goodId,jdbcType=BIGINT}, #{deliveryAddressId,jdbcType=BIGINT},
+      #{goodName,jdbcType=VARCHAR}, #{goodCount,jdbcType=INTEGER}, #{goodPrice,jdbcType=DECIMAL},
+      #{orderChannel,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP},
       #{payDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.Order" useGeneratedKeys="true">

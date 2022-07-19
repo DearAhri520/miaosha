@@ -37,7 +37,7 @@
             <td th:text="${goods.getGoodPrice}"></td>
             <td th:text="${goods.getSnipingPrice}"></td>
             <td th:text="${goods.getGoodStock}"></td>
-            <td><a th:href="'/goods/to_detail/'+${goods.id}">详情</a></td>
+            <td><a th:href="'/good_detail.html?goodId='+${goods.id}">详情</a></td>
         </tr>
     </table>
 </div>

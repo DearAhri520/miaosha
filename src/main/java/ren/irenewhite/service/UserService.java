@@ -1,9 +1,7 @@
 package ren.irenewhite.service;
 
-import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
 import ren.irenewhite.dao.UserDao;
 import ren.irenewhite.domain.User;
@@ -17,7 +15,6 @@ import ren.irenewhite.utils.UUIDUtil;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.util.UUID;
 
 /**
@@ -45,7 +42,7 @@ public class UserService {
     }
 
     /**
-     * 根据用户token从数据库获取一个用户
+     * 根据用户token从redis数据库获取一个用户
      *
      * @param response 响应
      * @param token 用户token
@@ -55,7 +52,7 @@ public class UserService {
         if (StringUtils.isEmpty(token)) {
             return null;
         }
-        User user = redisService.get(UserKey.token, token, User.class);
+        User user = redisService.get(UserKey.userToken, token, User.class);
         if (user != null) {
             addCookie(user, token, response);
         }
@@ -106,9 +103,9 @@ public class UserService {
      * @param response 返回的响应
      */
     private void addCookie(User user, String token, HttpServletResponse response) {
-        redisService.set(UserKey.token, token, user);
+        redisService.set(UserKey.userToken, token, user);
         Cookie cookie = new Cookie(COOKIE_NAME_TOKEN, token);
-        cookie.setMaxAge(UserKey.token.expireSeconds());
+        cookie.setMaxAge(UserKey.userToken.expireSeconds());
         cookie.setPath("/");
         response.addCookie(cookie);
     }

@@ -22,7 +22,7 @@ public class RegisterController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("to_register")
+    @RequestMapping("/to_register")
     public String toRegister() {
         return "register";
     }

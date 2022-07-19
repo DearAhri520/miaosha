@@ -3,103 +3,103 @@
 <mapper namespace="ren.irenewhite.dao.GoodDao">
   <resultMap id="BaseResultMap" type="ren.irenewhite.domain.Good">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="goods_name" jdbcType="VARCHAR" property="goodName" />
-    <result column="goods_title" jdbcType="VARCHAR" property="goodTitle" />
-    <result column="goods_img" jdbcType="VARCHAR" property="goodImg" />
-    <result column="goods_detail" jdbcType="VARCHAR" property="goodDetail" />
-    <result column="goods_price" jdbcType="DECIMAL" property="goodPrice" />
-    <result column="goods_stock" jdbcType="INTEGER" property="goodStock" />
+    <result column="good_name" jdbcType="VARCHAR" property="goodName" />
+    <result column="good_title" jdbcType="VARCHAR" property="goodTitle" />
+    <result column="good_img" jdbcType="VARCHAR" property="goodImg" />
+    <result column="good_detail" jdbcType="VARCHAR" property="goodDetail" />
+    <result column="good_price" jdbcType="DECIMAL" property="goodPrice" />
+    <result column="good_stock" jdbcType="INTEGER" property="goodStock" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, goods_name, goods_title, goods_img, goods_detail, goods_price, goods_stock
+    id, good_name, good_title, good_img, good_detail, good_price, good_stock
   </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from goods
+    delete from good
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.Good" useGeneratedKeys="true">
-    insert into goods (goods_name, goods_title, goods_img, 
-      goods_detail, goods_price, goods_stock
+    insert into good (good_name, good_title, good_img, 
+      good_detail, good_price, good_stock
       )
-    values (#{goodsName,jdbcType=VARCHAR}, #{goodsTitle,jdbcType=VARCHAR}, #{goodsImg,jdbcType=VARCHAR}, 
-      #{goodsDetail,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, #{goodsStock,jdbcType=INTEGER}
+    values (#{goodName,jdbcType=VARCHAR}, #{goodTitle,jdbcType=VARCHAR}, #{goodImg,jdbcType=VARCHAR}, 
+      #{goodDetail,jdbcType=VARCHAR}, #{goodPrice,jdbcType=DECIMAL}, #{goodStock,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.Good" useGeneratedKeys="true">
-    insert into goods
+    insert into good
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="goodsName != null">
-        goods_name,
+      <if test="goodName != null">
+        good_name,
       </if>
-      <if test="goodsTitle != null">
-        goods_title,
+      <if test="goodTitle != null">
+        good_title,
       </if>
-      <if test="goodsImg != null">
-        goods_img,
+      <if test="goodImg != null">
+        good_img,
       </if>
-      <if test="goodsDetail != null">
-        goods_detail,
+      <if test="goodDetail != null">
+        good_detail,
       </if>
-      <if test="goodsPrice != null">
-        goods_price,
+      <if test="goodPrice != null">
+        good_price,
       </if>
-      <if test="goodsStock != null">
-        goods_stock,
+      <if test="goodStock != null">
+        good_stock,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="goodsName != null">
-        #{goodsName,jdbcType=VARCHAR},
+      <if test="goodName != null">
+        #{goodName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsTitle != null">
-        #{goodsTitle,jdbcType=VARCHAR},
+      <if test="goodTitle != null">
+        #{goodTitle,jdbcType=VARCHAR},
       </if>
-      <if test="goodsImg != null">
-        #{goodsImg,jdbcType=VARCHAR},
+      <if test="goodImg != null">
+        #{goodImg,jdbcType=VARCHAR},
       </if>
-      <if test="goodsDetail != null">
-        #{goodsDetail,jdbcType=VARCHAR},
+      <if test="goodDetail != null">
+        #{goodDetail,jdbcType=VARCHAR},
       </if>
-      <if test="goodsPrice != null">
-        #{goodsPrice,jdbcType=DECIMAL},
+      <if test="goodPrice != null">
+        #{goodPrice,jdbcType=DECIMAL},
       </if>
-      <if test="goodsStock != null">
-        #{goodsStock,jdbcType=INTEGER},
+      <if test="goodStock != null">
+        #{goodStock,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="ren.irenewhite.domain.Good">
-    update goods
+    update good
     <set>
-      <if test="goodsName != null">
-        goods_name = #{goodsName,jdbcType=VARCHAR},
+      <if test="goodName != null">
+        good_name = #{goodName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsTitle != null">
-        goods_title = #{goodsTitle,jdbcType=VARCHAR},
+      <if test="goodTitle != null">
+        good_title = #{goodTitle,jdbcType=VARCHAR},
       </if>
-      <if test="goodsImg != null">
-        goods_img = #{goodsImg,jdbcType=VARCHAR},
+      <if test="goodImg != null">
+        good_img = #{goodImg,jdbcType=VARCHAR},
       </if>
-      <if test="goodsDetail != null">
-        goods_detail = #{goodsDetail,jdbcType=VARCHAR},
+      <if test="goodDetail != null">
+        good_detail = #{goodDetail,jdbcType=VARCHAR},
       </if>
-      <if test="goodsPrice != null">
-        goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      <if test="goodPrice != null">
+        good_price = #{goodPrice,jdbcType=DECIMAL},
       </if>
-      <if test="goodsStock != null">
-        goods_stock = #{goodsStock,jdbcType=INTEGER},
+      <if test="goodStock != null">
+        good_stock = #{goodStock,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="ren.irenewhite.domain.Good">
-    update goods
-    set goods_name = #{goodsName,jdbcType=VARCHAR},
-      goods_title = #{goodsTitle,jdbcType=VARCHAR},
-      goods_img = #{goodsImg,jdbcType=VARCHAR},
-      goods_detail = #{goodsDetail,jdbcType=VARCHAR},
-      goods_price = #{goodsPrice,jdbcType=DECIMAL},
-      goods_stock = #{goodsStock,jdbcType=INTEGER}
+    update good
+    set good_name = #{goodName,jdbcType=VARCHAR},
+      good_title = #{goodTitle,jdbcType=VARCHAR},
+      good_img = #{goodImg,jdbcType=VARCHAR},
+      good_detail = #{goodDetail,jdbcType=VARCHAR},
+      good_price = #{goodPrice,jdbcType=DECIMAL},
+      good_stock = #{goodStock,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -1,5 +1,6 @@
 package ren.irenewhite.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.SortParameters;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import ren.irenewhite.domain.User;
  * 秒杀订单service
  */
 @Service
+@Slf4j
 public class SnipingOrderService {
     @Autowired
     SnipingOrderDao snipingOrderDao;
@@ -29,12 +31,14 @@ public class SnipingOrderService {
         return snipingOrderDao.insert(snipingOrder);
     }
 
-    @Transactional
-    public int createSnipingOrder(Order order){
+    @Transactional(rollbackFor = Exception.class)
+    public SnipingOrder createSnipingOrder(Order order){
+        log.info(order.toString());
         SnipingOrder snipingOrder = new SnipingOrder();
         snipingOrder.setOrderId(order.getId());
         snipingOrder.setUserId(order.getUserId());
         snipingOrder.setGoodId(order.getGoodId());
-        return snipingOrderDao.insert(snipingOrder);
+        snipingOrderDao.insert(snipingOrder);
+        return snipingOrder;
     }
 }

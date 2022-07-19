@@ -18,16 +18,16 @@ public interface GoodDao{
 
     int insertSelective(Good record);
 
-    @Select("select * from goods where id = #{id}")
+    @Select("select * from good where id = #{id}")
     Good selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Good record);
 
     int updateByPrimaryKey(Good record);
 
-    @Update("update goods set good_stock = good_stock - 1 where id = #{id}")
+    @Update("update good set good_stock = good_stock - 1 where id = #{id}")
     int updateStockCountById(Long id);
 
-    @Select("select * from goods")
+    @Select("select * from good")
     List<Good> getGoods();
 }

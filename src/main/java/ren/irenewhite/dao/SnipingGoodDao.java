@@ -5,6 +5,11 @@ import ren.irenewhite.domain.SnipingGood;
 
 import java.util.List;
 
+/**
+ * 秒杀商品dao
+ *
+ * @author DearAhri520
+ */
 @Mapper
 public interface SnipingGoodDao {
     int deleteByPrimaryKey(Long id);

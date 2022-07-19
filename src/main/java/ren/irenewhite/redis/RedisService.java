@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Getter
 @AllArgsConstructor
-public final class RedisManagerImpl implements RedisManager {
+public final class RedisService implements RedisManager {
 
     private RedisTemplate<String, Object> redisTemplate;
 
@@ -75,6 +75,9 @@ public final class RedisManagerImpl implements RedisManager {
             return null;
         }
         Object obj = redisTemplate.opsForValue().get(key);
+        if (String.class == clazz) {
+            return (T) obj;
+        }
         return JSON.toJavaObject((JSON) obj, clazz);
     }
 

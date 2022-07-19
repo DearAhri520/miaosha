@@ -1,10 +1,12 @@
 package ren.irenewhite.service;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ren.irenewhite.dao.SnipingGoodDao;
-import ren.irenewhite.domain.Good;
 import ren.irenewhite.domain.SnipingGood;
+import ren.irenewhite.redis.RedisManager;
+import ren.irenewhite.redis.key.SnipingGoodKey;
 
 import java.util.List;
 
@@ -18,6 +20,9 @@ import java.util.List;
 public class SnipingGoodService {
     @Autowired
     SnipingGoodDao snipingGoodDao;
+
+    @Autowired
+    RedisManager redisManager;
 
     /**
      * 获取所有秒杀商品信息
@@ -35,7 +40,18 @@ public class SnipingGoodService {
      * @return 秒杀商品信息
      */
     public SnipingGood getSnipingGoodById(long id) {
-        return snipingGoodDao.getSnipingGoodById(id);
+        SnipingGood snipingGood;
+        /*redis获取*/
+        snipingGood = redisManager.get(SnipingGoodKey.SnipingGood, id + "", SnipingGood.class);
+        if (ObjectUtils.isNotEmpty(snipingGood)) {
+            return snipingGood;
+        }
+        /*redis获取为空,从数据库中获取并添加入缓存*/
+        snipingGood = snipingGoodDao.getSnipingGoodById(id);
+        if (ObjectUtils.isNotEmpty(snipingGood)) {
+            redisManager.set(SnipingGoodKey.SnipingGood, id + "", snipingGood);
+        }
+        return snipingGood;
     }
 
     /**

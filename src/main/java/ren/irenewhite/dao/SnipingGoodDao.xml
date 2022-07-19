@@ -13,23 +13,23 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sniping_goods
+    from sniping_good
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from sniping_goods
+    delete from sniping_good
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.SnipingGood" useGeneratedKeys="true">
-    insert into sniping_goods (good_id, sniping_price, stock_count, 
+    insert into sniping_good (good_id, sniping_price, stock_count, 
       start_time, end_time)
-    values (#{goodsId,jdbcType=BIGINT}, #{snipingPrice,jdbcType=DECIMAL}, #{stockCount,jdbcType=INTEGER}, 
+    values (#{goodId,jdbcType=BIGINT}, #{snipingPrice,jdbcType=DECIMAL}, #{stockCount,jdbcType=INTEGER}, 
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.SnipingGood" useGeneratedKeys="true">
-    insert into sniping_goods
+    insert into sniping_good
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="goodsId != null">
+      <if test="goodId != null">
         good_id,
       </if>
       <if test="snipingPrice != null">
@@ -46,8 +46,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="goodsId != null">
-        #{goodsId,jdbcType=BIGINT},
+      <if test="goodId != null">
+        #{goodId,jdbcType=BIGINT},
       </if>
       <if test="snipingPrice != null">
         #{snipingPrice,jdbcType=DECIMAL},
@@ -64,10 +64,10 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="ren.irenewhite.domain.SnipingGood">
-    update sniping_goods
+    update sniping_good
     <set>
-      <if test="goodsId != null">
-        good_id = #{goodsId,jdbcType=BIGINT},
+      <if test="goodId != null">
+        good_id = #{goodId,jdbcType=BIGINT},
       </if>
       <if test="snipingPrice != null">
         sniping_price = #{snipingPrice,jdbcType=DECIMAL},
@@ -85,8 +85,8 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="ren.irenewhite.domain.SnipingGood">
-    update sniping_goods
-    set good_id = #{goodsId,jdbcType=BIGINT},
+    update sniping_good
+    set good_id = #{goodId,jdbcType=BIGINT},
       sniping_price = #{snipingPrice,jdbcType=DECIMAL},
       stock_count = #{stockCount,jdbcType=INTEGER},
       start_time = #{startTime,jdbcType=TIMESTAMP},
@@ -94,15 +94,15 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="getSnipingGoods" resultType="ren.irenewhite.domain.SnipingGood">
-    select goods.*,sg.* from sniping_goods sg left join goods on sg.good_id = goods.id
+    select good.*,sg.* from sniping_good sg left join good on sg.good_id = good.id
   </select>
   <select id="getSnipingGoodById" parameterType="long" resultType="ren.irenewhite.domain.SnipingGood">
-    select goods.*,<include refid="Base_Column_List" />
-    from sniping_goods sg left join goods
-    on sg.good_id = goods.id where goods.id = #{id}
+    select good.*,<include refid="Base_Column_List" />
+    from sniping_good sg left join good
+    on sg.good_id = good.id where good.id = #{id}
   </select>
   <update id="updateSnipingStockCountById" parameterType="long">
-    update sniping_goods set sniping_good_stock = sniping_good_stock - 1 where good_id = #{id}
+    update sniping_good set sniping_good_stock = sniping_good_stock - 1 where good_id = #{id}
   </update>
 
 </mapper>

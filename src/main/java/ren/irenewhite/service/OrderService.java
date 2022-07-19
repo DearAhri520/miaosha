@@ -1,5 +1,6 @@
 package ren.irenewhite.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import java.util.Date;
  * 订单service
  */
 @Service
+@Slf4j
 public class OrderService {
     @Autowired
     OrderDao orderDao;
@@ -25,7 +27,7 @@ public class OrderService {
     @Autowired
     SnipingOrderService snipingOrderService;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Order createOrder(User user, SnipingGood snipingGood) {
         Order order = new Order();
         order.setCreateDate(new Date());
@@ -39,8 +41,16 @@ public class OrderService {
         /*todo:修改为枚举类型表示*/
         order.setStatus((byte) 0);
         order.setUserId(user.getId());
-        long id = orderDao.insert(order);
-        order.setId(id);
+        orderDao.insert(order);
+        log.info("insert {}", order);
         return order;
+    }
+
+    public Order getOrderByUserIdAndGoodId(long userId, long orderId) {
+        return orderDao.selectByUserIdAndGoodId(userId, orderId);
+    }
+
+    public Order getOrderById(long orderId) {
+        return orderDao.selectByPrimaryKey(orderId);
     }
 }

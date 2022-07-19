@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2022/6/24
  */
 @Service
-public class GoodService{
+public class GoodService {
 
     @Autowired
     GoodDao goodDao;
@@ -26,7 +26,11 @@ public class GoodService{
         return goodDao.updateStockCountById(id);
     }
 
-    public List<Good> getGoods(){
+    public List<Good> getGoods() {
         return goodDao.getGoods();
+    }
+
+    public Good getGoodById(long goodId) {
+        return goodDao.selectByPrimaryKey(goodId);
     }
 }

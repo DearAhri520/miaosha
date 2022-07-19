@@ -30,13 +30,17 @@ public class CodeMsg {
     public static CodeMsg MOBILE_NOT_EXIST = new CodeMsg(500216, "手机号不存在");
     //商品模块 5003XX
 
-    //订单模块 5004XX
+    /**
+     * 订单模块 5004XX
+     */
+    public static CodeMsg ORDER_NOT_EXIST = new CodeMsg(500400, "订单不存在");
+
 
     /**
      * 秒杀模块 5005XX
      */
     public static CodeMsg GOOD_SNIPING_OVER = new CodeMsg(500500, "商品库存已秒杀完毕");
-    public static CodeMsg CANT_REPEAT_SNIPING = new CodeMsg(500501,"您已秒杀成功，不能重复秒杀该商品");
+    public static CodeMsg CANT_REPEAT_SNIPING = new CodeMsg(500501, "您已秒杀成功，不能重复秒杀该商品");
 
 
     private CodeMsg(int code, String msg) {

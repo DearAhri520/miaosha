@@ -7,7 +7,7 @@ import lombok.Getter;
  * @author DearAhri520
  * @date 2022/6/1
  */
-public abstract class BasePrefix implements Prefix{
+public abstract class BasePrefix implements Prefix {
 
     /**
      * 过期时间
@@ -19,11 +19,14 @@ public abstract class BasePrefix implements Prefix{
      */
     private String prefix;
 
-    public BasePrefix(String prefix) {//0代表永不过期
+    /**
+     * 0代表永不过期
+     */
+    public BasePrefix(String prefix) {
         this(0, prefix);
     }
 
-    public BasePrefix( int expireSeconds, String prefix) {
+    public BasePrefix(int expireSeconds, String prefix) {
         this.expireSeconds = expireSeconds;
         this.prefix = prefix;
     }
@@ -36,7 +39,6 @@ public abstract class BasePrefix implements Prefix{
     @Override
     public String getPrefix() {
         String className = getClass().getSimpleName();
-        return className+":" + prefix;
+        return className + ":" + prefix;
     }
-
 }
