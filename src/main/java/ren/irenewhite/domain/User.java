@@ -46,5 +46,5 @@ public class User implements Serializable {
      */
     private Integer loginCount;
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 7194793218021438329L;
 }

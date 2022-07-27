@@ -39,8 +39,9 @@ public interface SnipingGoodDao {
     SnipingGood getSnipingGoodById(Long id);
 
     /**
-     * 根据商品id减少秒杀商品库存
+     * 根据商品id减少秒杀商品库存,返回影响的行数
      * @param id 商品id
+     * @return 影响的行数
      */
     int updateSnipingStockCountById(Long id);
 }

@@ -1,9 +1,11 @@
 package ren.irenewhite.redis;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.data.redis.core.RedisTemplate;
+import ren.irenewhite.redis.prefix.BasePrefix;
 import ren.irenewhite.redis.prefix.Prefix;
 
 import java.util.Arrays;
@@ -75,10 +77,10 @@ public final class RedisService implements RedisManager {
             return null;
         }
         Object obj = redisTemplate.opsForValue().get(key);
-        if (String.class == clazz) {
-            return (T) obj;
+        if (obj instanceof JSON) {
+            return JSONObject.toJavaObject((JSON) obj, clazz);
         }
-        return JSON.toJavaObject((JSON) obj, clazz);
+        return (T) obj;
     }
 
     @Override
@@ -140,6 +142,14 @@ public final class RedisService implements RedisManager {
             throw new RuntimeException("递减因子必须大于0");
         }
         return redisTemplate.opsForValue().increment(key, -delta);
+    }
+
+    @Override
+    public long decr(BasePrefix prefix, String key, long delta) {
+        if (delta < 0) {
+            throw new RuntimeException("递减因子必须大于0");
+        }
+        return redisTemplate.opsForValue().increment(prefix.getPrefix()+key, -delta);
     }
 
     @Override

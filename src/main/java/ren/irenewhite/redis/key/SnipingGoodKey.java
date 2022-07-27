@@ -10,11 +10,13 @@ public class SnipingGoodKey extends BasePrefix {
     /**
      * 一小时有效期
      */
-    private static final int EXPIRE = 60*60;
+    private static final int EXPIRE = 60 * 60;
 
     private SnipingGoodKey(int expireSeconds, String prefix) {
-        super(expireSeconds,prefix);
+        super(expireSeconds, prefix);
     }
 
-    public static SnipingGoodKey SnipingGood = new SnipingGoodKey(EXPIRE,"sg");
+    public static SnipingGoodKey SnipingGood = new SnipingGoodKey(EXPIRE, "sg");
+
+    public static SnipingGoodKey SnipingGoodStock = new SnipingGoodKey(EXPIRE, "sgt");
 }

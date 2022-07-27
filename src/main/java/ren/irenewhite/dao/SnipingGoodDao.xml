@@ -1,108 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ren.irenewhite.dao.SnipingGoodDao">
-  <resultMap id="BaseResultMap" type="ren.irenewhite.domain.SnipingGood">
-    <result column="sniping_price" jdbcType="DECIMAL" property="snipingPrice" />
-    <result column="sniping_good_stock" jdbcType="INTEGER" property="snipingGoodStock" />
-    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
-    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    sniping_price, sniping_good_stock, start_time, end_time
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sniping_good
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from sniping_good
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.SnipingGood" useGeneratedKeys="true">
-    insert into sniping_good (good_id, sniping_price, stock_count, 
-      start_time, end_time)
-    values (#{goodId,jdbcType=BIGINT}, #{snipingPrice,jdbcType=DECIMAL}, #{stockCount,jdbcType=INTEGER}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.SnipingGood" useGeneratedKeys="true">
-    insert into sniping_good
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="goodId != null">
-        good_id,
-      </if>
-      <if test="snipingPrice != null">
-        sniping_price,
-      </if>
-      <if test="stockCount != null">
-        stock_count,
-      </if>
-      <if test="startTime != null">
-        start_time,
-      </if>
-      <if test="endTime != null">
-        end_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="goodId != null">
-        #{goodId,jdbcType=BIGINT},
-      </if>
-      <if test="snipingPrice != null">
-        #{snipingPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="stockCount != null">
-        #{stockCount,jdbcType=INTEGER},
-      </if>
-      <if test="startTime != null">
-        #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null">
-        #{endTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="ren.irenewhite.domain.SnipingGood">
-    update sniping_good
-    <set>
-      <if test="goodId != null">
-        good_id = #{goodId,jdbcType=BIGINT},
-      </if>
-      <if test="snipingPrice != null">
+    <resultMap id="BaseResultMap" type="ren.irenewhite.domain.SnipingGood">
+        <result column="sniping_price" jdbcType="DECIMAL" property="snipingPrice"/>
+        <result column="sniping_good_stock" jdbcType="INTEGER" property="snipingGoodStock"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        sniping_price, sniping_good_stock, start_time, end_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sniping_good
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sniping_good
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.SnipingGood"
+            useGeneratedKeys="true">
+        insert into sniping_good (good_id, sniping_price, stock_count,
+        start_time, end_time)
+        values (#{goodId,jdbcType=BIGINT}, #{snipingPrice,jdbcType=DECIMAL}, #{stockCount,jdbcType=INTEGER},
+        #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ren.irenewhite.domain.SnipingGood"
+            useGeneratedKeys="true">
+        insert into sniping_good
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="goodId != null">
+                good_id,
+            </if>
+            <if test="snipingPrice != null">
+                sniping_price,
+            </if>
+            <if test="stockCount != null">
+                stock_count,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="goodId != null">
+                #{goodId,jdbcType=BIGINT},
+            </if>
+            <if test="snipingPrice != null">
+                #{snipingPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="stockCount != null">
+                #{stockCount,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="ren.irenewhite.domain.SnipingGood">
+        update sniping_good
+        <set>
+            <if test="goodId != null">
+                good_id = #{goodId,jdbcType=BIGINT},
+            </if>
+            <if test="snipingPrice != null">
+                sniping_price = #{snipingPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="stockCount != null">
+                stock_count = #{stockCount,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="ren.irenewhite.domain.SnipingGood">
+        update sniping_good
+        set good_id = #{goodId,jdbcType=BIGINT},
         sniping_price = #{snipingPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="stockCount != null">
         stock_count = #{stockCount,jdbcType=INTEGER},
-      </if>
-      <if test="startTime != null">
         start_time = #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null">
-        end_time = #{endTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="ren.irenewhite.domain.SnipingGood">
-    update sniping_good
-    set good_id = #{goodId,jdbcType=BIGINT},
-      sniping_price = #{snipingPrice,jdbcType=DECIMAL},
-      stock_count = #{stockCount,jdbcType=INTEGER},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <select id="getSnipingGoods" resultType="ren.irenewhite.domain.SnipingGood">
-    select good.*,sg.* from sniping_good sg left join good on sg.good_id = good.id
-  </select>
-  <select id="getSnipingGoodById" parameterType="long" resultType="ren.irenewhite.domain.SnipingGood">
-    select good.*,<include refid="Base_Column_List" />
-    from sniping_good sg left join good
-    on sg.good_id = good.id where good.id = #{id}
-  </select>
-  <update id="updateSnipingStockCountById" parameterType="long">
-    update sniping_good set sniping_good_stock = sniping_good_stock - 1 where good_id = #{id}
-  </update>
+        end_time = #{endTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="getSnipingGoods" resultType="ren.irenewhite.domain.SnipingGood">
+        select good.*,sg.* from sniping_good sg left join good on sg.good_id = good.id
+    </select>
+    <select id="getSnipingGoodById" parameterType="long" resultType="ren.irenewhite.domain.SnipingGood">
+        select good.*,
+        <include refid="Base_Column_List"/>
+        from sniping_good sg left join good
+        on sg.good_id = good.id where good.id = #{id}
+    </select>
+    <update id="updateSnipingStockCountById" parameterType="long">
+        update sniping_good set sniping_good_stock = sniping_good_stock - 1 where good_id = #{id} and sniping_good_stock > 0
+    </update>
 
 </mapper>

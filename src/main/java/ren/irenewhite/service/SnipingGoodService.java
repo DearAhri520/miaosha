@@ -22,7 +22,7 @@ public class SnipingGoodService {
     SnipingGoodDao snipingGoodDao;
 
     @Autowired
-    RedisManager redisManager;
+    RedisManager redisService;
 
     /**
      * 获取所有秒杀商品信息
@@ -42,14 +42,14 @@ public class SnipingGoodService {
     public SnipingGood getSnipingGoodById(long id) {
         SnipingGood snipingGood;
         /*redis获取*/
-        snipingGood = redisManager.get(SnipingGoodKey.SnipingGood, id + "", SnipingGood.class);
+        snipingGood = redisService.get(SnipingGoodKey.SnipingGood, id + "", SnipingGood.class);
         if (ObjectUtils.isNotEmpty(snipingGood)) {
             return snipingGood;
         }
         /*redis获取为空,从数据库中获取并添加入缓存*/
         snipingGood = snipingGoodDao.getSnipingGoodById(id);
         if (ObjectUtils.isNotEmpty(snipingGood)) {
-            redisManager.set(SnipingGoodKey.SnipingGood, id + "", snipingGood);
+            redisService.set(SnipingGoodKey.SnipingGood, id + "", snipingGood);
         }
         return snipingGood;
     }

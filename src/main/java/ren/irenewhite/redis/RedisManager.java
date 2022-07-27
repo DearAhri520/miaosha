@@ -1,6 +1,7 @@
 package ren.irenewhite.redis;
 
 import org.springframework.data.redis.core.RedisTemplate;
+import ren.irenewhite.redis.prefix.BasePrefix;
 import ren.irenewhite.redis.prefix.Prefix;
 
 import java.util.List;
@@ -133,6 +134,16 @@ public interface RedisManager {
      * @return
      */
     long decr(String key, long delta);
+
+    /**
+     * 递减
+     *
+     * @param prefix 前缀
+     * @param key 键
+     * @param delta 减少的数
+     * @return
+     */
+    long decr(BasePrefix prefix, String key, long delta);
 
     /**
      * HashGet

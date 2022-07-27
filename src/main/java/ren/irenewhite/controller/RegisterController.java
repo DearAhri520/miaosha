@@ -22,7 +22,7 @@ public class RegisterController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/to_register")
+    @RequestMapping("/")
     public String toRegister() {
         return "register";
     }
@@ -31,7 +31,7 @@ public class RegisterController {
     @RequestMapping("/do_register")
     public Result<Boolean> doRegister(@Valid LoginUser user) {
         log.info(user.toString());
-        userService.register(user);
-        return Result.success(true);
+        boolean success = userService.register(user);
+        return Result.success(success);
     }
 }

@@ -47,7 +47,15 @@
             <span id="snipingTip"></span>
         </td>
         <td>
-            <button class="btn btn-primary btn-block" type="button" id="buyButton" onclick="doSniping()">立即秒杀</button>
+            <div class="row">
+                <div class="form-inline">
+                    <img id="verifyCodeImg" width="80" height="32" style="display: none"/>
+                    <input id="verifyCode" class="form-control" style="display: none">
+                    <button class="btn btn-primary" type="button" id="buyButton" onclick="getSnipingPath()">
+                        立即秒杀
+                    </button>
+                </div>
+            </div>
             <input type="hidden" name="goodId" id="goodId"/>
         </td>
         <tr>
@@ -70,17 +78,79 @@
         getDetail();
     });
 
-    function doSniping() {
+    function getSnipingPath() {
+        var goodId = $("#goodId").val()
+        showLoading();
         $.ajax({
-            url: "sniping/do_sniping",
-            type: "POST",
+            url: "sniping/path",
+            type: "GET",
+            data: {
+                goodId: goodId
+            },
+            success: function (data) {
+                if (data.code == 0) {
+                    var path = data.data;
+                    doSniping(path);
+                } else {
+                    layer.msg(data.msg)
+                }
+            },
+            error: function () {
+                layer.msg("客户端请求有误")
+            }
+        })
+    }
+
+    function getSnipingResult(goodId) {
+        showLoading();
+        $.ajax({
+            url: "sniping/result",
+            type: "GET",
             data: {
                 goodId: $("#goodId").val()
             },
             success: function (data) {
                 if (data.code === 0) {
-                    layer.msg("客户端请求成功:" + data.msg)
-                    window.location.href = "order_detail.html?orderId=" + data.data.id
+                    var result = data.data;
+                    if (result < 0) {
+                        layer.msg("对不起,秒杀失败");
+                    } else if (result == 0) {//继续轮询
+                        setTimeout(function () {
+                            getSnipingResult(goodId);
+                        }, 50)
+                    } else {
+                        layer.confirm(
+                            "恭喜你,秒杀成功!查看订单?",
+                            {btn: ["确定", "取消"]},
+                            function () {
+                                window.location.href = "order_detail.html?orderId=" + result
+                            },
+                            function () {
+                                layer.closeAll()
+                            })
+                    }
+                } else {
+                    layer.msg("客户端请求错误:" + data.msg)
+                }
+            },
+            error: function (data) {
+                layer.msg("客户端请求错误:" + data.msg)
+            }
+        });
+    }
+
+    function doSniping(path) {
+        $.ajax({
+            url: "sniping/do_sniping",
+            type: "POST",
+            data: {
+                goodId: $("#goodId").val(),
+                path: path
+            },
+            success: function (data) {
+                if (data.code === 0) {
+                    //window.location.href = "order_detail.html?orderId=" + data.data.id
+                    getSnipingResult($("#goodId").val());
                 } else {
                     layer.msg("客户端请求错误:" + data.msg)
                 }
@@ -146,9 +216,15 @@
                 clearTimeout(timeout);
             }
             $("#snipingTip").html("秒杀进行中");
+            $("#verifyCodeImg").attr("src", "/sniping/verifyCode?goodId=" + $("#goodId").val())
+            $("#verifyCodeImg").show()
+            $("#verifyCode").show()
+
         } else {//秒杀已经结束
             $("#buyButton").attr("disabled", true);
             $("#snipingTip").html("秒杀已经结束");
+            $("#verifyCodeImg").hide()
+            $("#verifyCode").hide()
         }
     }
 </script>

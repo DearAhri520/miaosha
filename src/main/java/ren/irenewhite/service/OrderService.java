@@ -46,10 +46,6 @@ public class OrderService {
         return order;
     }
 
-    public Order getOrderByUserIdAndGoodId(long userId, long orderId) {
-        return orderDao.selectByUserIdAndGoodId(userId, orderId);
-    }
-
     public Order getOrderById(long orderId) {
         return orderDao.selectByPrimaryKey(orderId);
     }
